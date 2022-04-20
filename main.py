@@ -8,6 +8,13 @@ Admins = {
     users["oussema"] : "admin"
 }
 
+userEmail = {
+    users["oussema"] : "oussema@oussema.com"
+}
+
+userAdress = {
+    users["oussema"] : "Ariana"
+}
 
 
 def rechercheProduit():
@@ -67,8 +74,12 @@ if __name__ == "__main__":
     while (testeur == True):
         var = input("enter your choice \n")
         if var == "1":
-            user = input("Enter your new username \n")
-            mdp = input("Enter your new password \n")
+            user = input("Enter your new username :\n")
+            mdp = input("Enter your new password :\n")
+            email = input("enter your email :\n")
+            userEmail[user] = email
+            adress = input("enter your adress :\n")
+            userAdress[user] = adress
             register(user, mdp)
             testeur = False
             break
