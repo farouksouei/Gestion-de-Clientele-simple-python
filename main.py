@@ -5,15 +5,15 @@ users = {
 }
 
 Admins = {
-    users["oussema"] : "admin"
+    users["oussema"]: "admin"
 }
 
 userEmail = {
-    users["oussema"] : "oussema@oussema.com"
+    users["oussema"]: "oussema@oussema.com"
 }
 
 userAdress = {
-    users["oussema"] : "Ariana"
+    users["oussema"]: "Ariana"
 }
 
 
@@ -30,8 +30,6 @@ def login(user, mdp):
         else:
             print("user is not registered ")
             exit()
-
-
 
 
 def register(user, mdp):
@@ -59,11 +57,21 @@ def printAllUsers():
     for key, value in users.items():
         print(key, ' : ', value)
 
+
+def userIsAdmin(user):
+    for key, value in users.items():
+        if key == user:
+            return True
+        else:
+            return False
+
+
 def userDashboard(user):
     print("***********__________________________________*****________________________*******__________________"
           "******____________________****")
-    print(f"**PARADIS** | Rechercher Un Produit (taper 1) | ****| utulisateur : {user} |*******| aide (taper 2) |******| "
-          f"panier (taper 3) |*")
+    print(
+        f"**PARADIS** | Rechercher Un Produit (taper 1) | ****| utulisateur : {user} |*******| aide (taper 2) |******| "
+        f"panier (taper 3) |*")
     print("***********----------------------------------*****------------------------*******------------------"
           "******--------------------****")
 
@@ -91,4 +99,3 @@ if __name__ == "__main__":
         else:
             print("Input invalid")
 userDashboard(user)
-
