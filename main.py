@@ -65,8 +65,22 @@ def userIsAdmin(user):
         else:
             return False
 
+def getUserAdress(user):
+    for key, value in userAdress.items():
+        if key == user:
+            return value
+        else:
+            return "erreur"
 
-def userDashboard(user):
+def getUserEmail(user):
+    for key, value in userEmail.items():
+        if key == user:
+            return value
+        else:
+            return "erreur"
+
+
+def userDashboardNavBar(user):
     print("*************_________________________________******______________________*********__________________"
           "******____________________*")
     print(
@@ -76,6 +90,18 @@ def userDashboard(user):
           "******--------------------*")
     if userIsAdmin(user):
         print("user is admin")
+    userDashboardProfile()
+
+def userDashboardProfile(user):
+    userEmailDash = getUserEmail(user)
+    userAdressD = getUserAdress(user)
+    print("***************************                                 ******************************")
+    print("* information personelle  *                                 *  adress                    *")
+    print("***************************                                 ******************************")
+    print(f"* username : {user}      *                                 * user adress : {userAdressD}*")
+    print(f"* email : {userEmailDash}*                                 *                            *")
+    print("*                         *                                 *                            *")
+    print("***************************                                 ******************************")
 
 
 if __name__ == "__main__":
@@ -100,4 +126,4 @@ if __name__ == "__main__":
             break
         else:
             print("Input invalid")
-userDashboard(user)
+userDashboardNavBar(user)
