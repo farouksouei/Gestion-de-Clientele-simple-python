@@ -1,6 +1,8 @@
 testeur = True
 prduits = ("Espadris","Chausettes")
-users = {}
+users = {
+    "oussema":"dardari"
+}
 
 def rechercheProduit():
     print("Hello World!\n")
@@ -9,6 +11,7 @@ def login(user,mdp):
     print("login succesful\n")
 
 def register(user,mdp):
+    users[user] = mdp
     print("register succesfull !!\n")
 
 
@@ -29,3 +32,5 @@ if __name__ == "__main__":
             login(user,mdp)
         else:
             print("Input invalid")
+for key, value in users.items():
+    print(key, ' : ', value)
