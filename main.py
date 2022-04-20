@@ -5,15 +5,15 @@ users = {
 }
 
 Admins = {
-    users["oussema"]: "admin"
+    "oussema": "admin"
 }
 
 userEmail = {
-    users["oussema"]: "oussema@oussema.com"
+    "oussema": "oussema@oussema.com"
 }
 
 userAdress = {
-    users["oussema"]: "Ariana"
+    "oussema": "Ariana"
 }
 
 
@@ -25,8 +25,9 @@ def login(user, mdp):
     for key, value in users.items():
         if key == user and value == mdp:
             print("login succesful\n")
-        elif key == user & value != mdp:
+        elif key == user and value != mdp:
             print("wrong password !")
+            exit()
         else:
             print("user is not registered ")
             exit()
@@ -58,12 +59,23 @@ def printAllUsers():
         print(key, ' : ', value)
 
 
+def printAllUserAdresses():
+    for key, value in userAdress.items():
+        print(key, ' : ', value)
+
+
+def printAllUsersEmails():
+    for key, value in userEmail.items():
+        print(key, ' : ', value)
+
+
 def userIsAdmin(user):
     for key, value in users.items():
         if key == user:
             return True
         else:
             return False
+
 
 def getUserAdress(user):
     for key, value in userAdress.items():
@@ -72,9 +84,11 @@ def getUserAdress(user):
         else:
             return "erreur"
 
+
 def getUserEmail(user):
     for key, value in userEmail.items():
         if key == user:
+            print(value)
             return value
         else:
             return "erreur"
@@ -90,17 +104,18 @@ def userDashboardNavBar(user):
           "******--------------------*")
     if userIsAdmin(user):
         print("user is admin")
-    userDashboardProfile()
 
-def userDashboardProfile(user):
-    userEmailDash = getUserEmail(user)
-    userAdressD = getUserAdress(user)
+
+def userDashboardProfile(user,email,adress):
+    if email == "" and adress =="":
+        email = getUserEmail(user)
+        adress = getUserAdress(user)
     print("***************************                                 ******************************")
     print("* information personelle  *                                 *  adress                    *")
     print("***************************                                 ******************************")
-    print(f"* username : {user}      *                                 * user adress : {userAdressD}*")
-    print(f"* email : {userEmailDash}*                                 *                            *")
-    print("*                         *                                 *                            *")
+    print(f"* username : {user}                                         user adress : {adress}  ")
+    print(f"* email : {email}                                                                ")
+    print("*                         *                                                               ")
     print("***************************                                 ******************************")
 
 
@@ -127,3 +142,7 @@ if __name__ == "__main__":
         else:
             print("Input invalid")
 userDashboardNavBar(user)
+userDashboardProfile(user,email,adress)
+print(user)
+printAllUsersEmails()
+printAllUserAdresses()
