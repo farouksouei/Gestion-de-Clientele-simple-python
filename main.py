@@ -1,5 +1,7 @@
 testeur = True
-prduits = ("Espadris", "Chausettes")
+produits = ("Espadris", "Chausettes")
+email=""
+adress=""
 users = {
     "oussema": "dardari"
 }
@@ -17,8 +19,11 @@ userAdress = {
 }
 
 
-def rechercheProduit():
-    print("Hello World!\n")
+def rechercheProduit(n,list):
+    for i in range(len(list)):
+        if list[i] == n:
+            return True
+    return False
 
 
 def login(user, mdp):
@@ -38,7 +43,7 @@ def register(user, mdp):
     print("are you an admin user ? \n")
     testeur = True
     while (testeur == True):
-        var = input("answer by yes or no")
+        var = input("answer by yes or no \n")
         if var == "yes":
             Admins[user] = "admin"
             print("admin user added !")
@@ -105,6 +110,11 @@ def userDashboardNavBar(user):
     if userIsAdmin(user):
         print("user is admin")
 
+def userDashboardRecherche(rechercheProduit):
+    if rechercheProduit:
+        print("le produit est disponible")
+    else:
+        print("le produit n'est pas disponible")
 
 def userDashboardProfile(user,email,adress):
     if email == "" and adress =="":
@@ -132,7 +142,6 @@ if __name__ == "__main__":
             adress = input("enter your adress :\n")
             userAdress[user] = adress
             register(user, mdp)
-            testeur = False
             break
         elif var == "2":
             user = input("Enter your username \n")
@@ -141,8 +150,16 @@ if __name__ == "__main__":
             break
         else:
             print("Input invalid")
-userDashboardNavBar(user)
-userDashboardProfile(user,email,adress)
+
+    userDashboardNavBar(user)
+    userDashboardProfile(user, email, adress)
+    while testeur == True:
+        choice = input("enter your activity :")
+        if choice == "1":
+            recherche = input("Entrer le produit a rechercher :")
+            recherche = rechercheProduit(recherche,produits)
+            userDashboardNavBar(user)
+            userDashboardRecherche(recherche)
+
+
 print(user)
-printAllUsersEmails()
-printAllUserAdresses()
