@@ -1,165 +1,411 @@
-testeur = True
-produits = ("Espadris", "Chausettes")
-email=""
-adress=""
-users = {
-    "oussema": "dardari"
-}
+users = [{
+    'id': 1,
+    'name': 'oussema',
+    'password': '123',
+    'email': 'oussema@gmail.com',
+    'phone': '12345',
+    'address': '123 ariana',
+    'role': 'admin'
+}]
 
-Admins = {
-    "oussema": "admin"
-}
+products = [{
+    'id': 1,
+    'name': 'product1',
+    'price': 100,
+}, {
+    'id': 2,
+    'name': 'product2',
+    'price': 200,
+}, {
+    'id': 3,
+    'name': 'product3',
+    'price': 300,
+}]
 
-userEmail = {
-    "oussema": "oussema@oussema.com"
-}
+prductsPurchase = [{
+    'id': 1,
+    'product': products[0],
+    'user': 'oussema',
+    'quantity': 3}, {
+    'id': 2,
+    'product': products[1],
+    'quantity': 2,
+    'user': 'oussema'}, ]
 
-userAdress = {
-    "oussema": "Ariana"
-}
+mailboxx = [{
+    'id': 1,
+    'from': 'farouk',
+    'to': 'oussema',
+    'subject': 'TESTER LE SUJET DU MAIL',
+    'message': 'TESTER LE MESSAGE DU MAIL',
+}, {
+    'id': 2,
+    'from': 'oussema',
+    'to': 'farouk',
+    'subject': 'TESTER LE SUJET DU MAIL',
+    'message': 'TESTER LE MESSAGE DU MAIL',
 
-
-def rechercheProduit(n,list):
-    for i in range(len(list)):
-        if list[i] == n:
-            return True
-    return False
-
-
-def login(user, mdp):
-    for key, value in users.items():
-        if key == user and value == mdp:
-            print("login succesful\n")
-        elif key == user and value != mdp:
-            print("wrong password !")
-            exit()
-        else:
-            print("user is not registered ")
-            exit()
-
-
-def register(user, mdp):
-    users[user] = mdp
-    print("are you an admin user ? \n")
-    testeur = True
-    while (testeur == True):
-        var = input("answer by yes or no \n")
-        if var == "yes":
-            Admins[user] = "admin"
-            print("admin user added !")
-            testeur = False
-            break
-        elif var == "no":
-            print("normal user added !")
-            testeur = False
-            break
-        else:
-            print("Input invalid !!")
-
-    print("register succesfull !!\n")
+}]
+AvisEnAttente = [{
+    'id': 1,
+    'from': 'oussema',
+    'message': 'test'}]
 
 
-def printAllUsers():
-    for key, value in users.items():
-        print(key, ' : ', value)
+def Aide():
+    print("")
 
 
-def printAllUserAdresses():
-    for key, value in userAdress.items():
-        print(key, ' : ', value)
-
-
-def printAllUsersEmails():
-    for key, value in userEmail.items():
-        print(key, ' : ', value)
-
-
-def userIsAdmin(user):
-    for key, value in users.items():
-        if key == user:
-            return True
-        else:
-            return False
-
-
-def getUserAdress(user):
-    for key, value in userAdress.items():
-        if key == user:
-            return value
-        else:
-            return "erreur"
-
-
-def getUserEmail(user):
-    for key, value in userEmail.items():
-        if key == user:
-            print(value)
-            return value
-        else:
-            return "erreur"
-
-
-def userDashboardNavBar(user):
-    print("*************_________________________________******______________________*********__________________"
-          "******____________________*")
+def navBar(user):
+    print("****************************************************************************************")
     print(
-        f"**PARADIS***| Rechercher Un Produit (taper 1) |****| utulisateur : {user} |*******| aide (taper 2) |******| "
-        f"panier (taper 3) |*")
-    print("*************---------------------------------******----------------------*********------------------"
-          "******--------------------*")
-    if userIsAdmin(user):
-        print("user is admin")
-
-def userDashboardRecherche(rechercheProduit):
-    if rechercheProduit:
-        print("le produit est disponible")
-    else:
-        print("le produit n'est pas disponible")
-
-def userDashboardProfile(user,email,adress):
-    if email == "" and adress =="":
-        email = getUserEmail(user)
-        adress = getUserAdress(user)
-    print("***************************                                 ******************************")
-    print("* information personelle  *                                 *  adress                    *")
-    print("***************************                                 ******************************")
-    print(f"* username : {user}                                         user adress : {adress}  ")
-    print(f"* email : {email}                                                                ")
-    print("*                         *                                                               ")
-    print("***************************                                 ******************************")
+        f"** Paradis **|Chercher Un Produit (Taper 1)|** Bonjour : {user} |** Aide (Taper 2) |**|Panier (Taper 3)|")
+    print("****************************************************************************************")
 
 
-if __name__ == "__main__":
-    print("Enter 1 to Register if you don't have an account\n")
-    print("Enter 2 to Login if you have an account\n")
-    while (testeur == True):
-        var = input("enter your choice \n")
-        if var == "1":
-            user = input("Enter your new username :\n")
-            mdp = input("Enter your new password :\n")
-            email = input("enter your email :\n")
-            userEmail[user] = email
-            adress = input("enter your adress :\n")
-            userAdress[user] = adress
-            register(user, mdp)
-            break
-        elif var == "2":
-            user = input("Enter your username \n")
-            mdp = input("Enter your password \n")
-            login(user, mdp)
+def find_product(id):
+    for product in products:
+        if product['id'] == id:
+            print("produit found")
             break
         else:
-            print("Input invalid")
+            print("product not found")
+    print("press 0 to return to dashbord")
+    u = input("")
+    if u == '0':
+        main()
+    else:
+        find_product(id)
 
-    userDashboardNavBar(user)
-    userDashboardProfile(user, email, adress)
-    while testeur == True:
-        choice = input("enter your activity :")
+
+def find_product_name(name):
+    i = True
+    for product in products:
+        if product['name'] == name:
+            i = False
+            print("produit found")
+            break
+    if i == True:
+        print("product not found")
+    print("press 0 to return to dashbord")
+    u = input("")
+    if u == '0':
+        main()
+    else:
+        find_product(id)
+
+
+def Panier(user):
+    print("****************************************************************************************")
+    print(f"**Panier de {user}**")
+    print("****************************************************************************************")
+    for product in prductsPurchase:
+        if product['user'] == user:
+            print(f"{product['product']['name']}")
+            print(f"{product['product']['price']}")
+            print(f"{product['quantity']}")
+            print(
+                "****************************************************************************************")
+    print("****************************************************************************************")
+    print("press 0 to return to dashbord")
+    u = input("")
+    if u == '0':
+        main()
+    else:
+        Panier(user)
+
+
+def Account(user):
+    print("****************************************************************************************")
+    print(f"***Compte de {user}***")
+    print("****************************************************************************************")
+    for userz in users:
+        if userz['name'] == user:
+            print(f"{userz['name']}")
+            print(f"{userz['email']}")
+            print(f"{userz['phone']}")
+            print(f"{userz['address']}")
+            print(f"{userz['role']}")
+            print(
+                "****************************************************************************************")
+    print("press 0 to return to dashbord")
+    u = input("")
+    if u == '0':
+        main()
+    else:
+        Account(user)
+
+
+def MailBox(user):
+    id = 1
+    print("****************************************************************************************")
+    print(f"***Boite De reception de {user}***")
+    print("****************************************************************************************")
+    for mail in mailboxx:
+        if mail['to'] == user:
+            print(f"email numero : {id}")
+            print(f"{mail['from']}")
+            print(f"{mail['subject']}")
+            print(f"{mail['message']}")
+            id += 1
+            print(
+                "****************************************************************************************")
+    print("press 0 to return to dashbord")
+    print("press 1 to send a mail")
+    print("press 2 to see sent mail")
+    u = input("")
+    if u == '0':
+        main()
+    elif u == '1':
+        send_mail(user)
+    elif u == '2':
+        sentMail(user)
+    else:
+        MailBox(user)
+
+
+def send_mail(user):
+    print("****************************************************************************************")
+    print(f"***Envoyer un mail de {user}***")
+    print("****************************************************************************************")
+    print("***Entrer le nom du personne que vous voulez envoyer un mail***")
+    name = input()
+    print("***Entrer leur email***")
+    email = input()
+    print("***Entrer votre sujet***")
+    subject = input()
+    print("***Entrer votre message***")
+    message = input()
+    mailboxx.append({
+        'id': len(mailboxx) + 1,
+        'from': user,
+        'email': email,
+        'to': name,
+        'subject': subject,
+        'message': message
+    })
+    print("press 0 to return to dashbord")
+    print("press 1 to send a mail")
+    print("press 2 to see sent mail")
+    u = input("")
+    if u == '0':
+        main()
+    elif u == '1':
+        MailBox(user)
+    elif u == '2':
+        sentMail(user)
+    else:
+        send_mail(user)
+
+
+def sentMail(user):
+    print("****************************************************************************************")
+    print(f"***Boite De reception de {user}***")
+    print("****************************************************************************************")
+    for mail in mailboxx:
+        if mail['from'] == user:
+            print(f"email numero : {mail['id']}")
+            print(f"{mail['from']}")
+            print(f"{mail['subject']}")
+            print(f"{mail['message']}")
+            print(
+                "****************************************************************************************")
+    print("press 0 to return to dashbord")
+    print("press 1 to send a mail")
+    print("press 2 to see the mailbox")
+    u = input("")
+    if u == '0':
+        main()
+    elif u == '1':
+        send_mail(user)
+    elif u == '2':
+        MailBox(user)
+    else:
+        sentMail(user)
+
+
+def show_avis():
+    print("****************************************************************************************")
+    print("***Avis en attente***")
+    print("****************************************************************************************")
+    for avis in AvisEnAttente:
+        print(f"{avis['from']}")
+        print(f"{avis['message']}")
+        print(
+            "****************************************************************************************")
+    print("press 0 to return to dashbord")
+    print("press 1 to send avis")
+    u = input("")
+    if u == '0':
+        main()
+    else:
+        show_avis()
+
+
+def send_avis(user):
+    print("****************************************************************************************")
+    print(f"***Envoyer un avis a {user}***")
+    print("****************************************************************************************")
+    print("***Entrer votre avis***")
+    message = input()
+    AvisEnAttente.append({
+        'id': len(AvisEnAttente) + 1,
+        'from': user,
+        'message': message
+    })
+    print("press 0 to return to dashbord")
+    u = input("")
+    if u == '0':
+        main()
+    else:
+        send_avis(user)
+
+
+def facture(user):
+    print("****************************************************************************************")
+    print(f"***Facture de {user}***")
+    print("****************************************************************************************")
+    montant_total = 0
+    for product in prductsPurchase:
+        if product['user'] == user:
+            print(f"Nom du produit : {product['product']['name']}")
+            print(f"prix du produit = {product['product']['price']}")
+            print(f"Quantité du = {product['quantity']}")
+            montant = product['product']['price'] * product['quantity']
+
+            montant_total += montant
+            print(
+                f"montant = {montant} DT")
+            print(
+                "****************************************************************************************")
+    print("****************************************************************************************")
+    print(f"montant total = {montant_total} DT")
+    print("facture généree avec succes")
+    print("press 0 to return to dashbord")
+    u = input("")
+    if u == '0':
+        main()
+    else:
+        facture(user)
+
+
+def modify_password(user):
+    print("****************************************************************************************")
+    print(f"***Modifier votre mot de passe a {user}***")
+    print("****************************************************************************************")
+    print("***Entrer votre nouveau mot de passe***")
+    password = input()
+    i = 0
+    for userz in users:
+        if userz['name'] == user:
+            users[i]['password'] = password
+        else:
+            i += 1
+    print("press 0 to return to dashbord")
+    u = input("")
+    if u == '0':
+        main()
+    else:
+        modify_password(user)
+
+
+def userDashboard():
+    print("****************************************************************************************")
+    print("***Pour voir Votre Compte taper 4***")
+    print("****************************************************************************************")
+    print("***Pour voir Votre Boite De reception taper 5***")
+    print("****************************************************************************************")
+    print("***Pour voir Les Avis en attente taper 6***")
+    print("****************************************************************************************")
+    print("***Pour voir Votre Facture taper 7***")
+    print("****************************************************************************************")
+    print("***Pour Modifer votre mot de passe taper 8***")
+    print("****************************************************************************************")
+    print("***Pour Quitter taper 0***")
+    print("****************************************************************************************")
+
+
+def main():
+    print(prductsPurchase[0]['product']['id'])
+    while True:
+        print("****************************************************************************************")
+        print("***Pour vous inscrire taper 1***")
+        print("****************************************************************************************")
+        print("***Pour vous connecter taper 2***")
+        print("****************************************************************************************")
+        print("***Pour quitter taper 0***")
+        print("****************************************************************************************")
+        choice = input()
         if choice == "1":
-            recherche = input("Entrer le produit a rechercher :")
-            recherche = rechercheProduit(recherche,produits)
-            userDashboardNavBar(user)
-            userDashboardRecherche(recherche)
+            print(
+                "****************************************************************************************")
+            print("***Entrer votre nom***")
+            name = input()
+            print("***Entrer votre email***")
+            email = input()
+            print("***Entrer votre telephone***")
+            phone = input()
+            print("***Entrer votre adresse***")
+            address = input()
+            print("***Entrer votre mot de passe***")
+            password = input()
+            users.append({
+                'id': len(users) + 1,
+                'name': name,
+                'email': email,
+                'phone': phone,
+                'address': address,
+                'password': password
+            })
+            print(
+                "****************************************************************************************")
+            print("inscription avec succes")
+            print(
+                "****************************************************************************************")
+        elif choice == "2":
+            print(
+                "****************************************************************************************")
+            print("***Entrer votre nom***")
+            name = input()
+            print("***Entrer votre mot de passe***")
+            password = input()
+            for user in users:
+                if user['name'] == name and user['password'] == password:
+                    print(
+                        "****************************************************************************************")
+                    print("connexion avec succes")
+                    print(
+                        "****************************************************************************************")
+                    navBar(name)
+                    userDashboard()
+                    while True:
+                        choice = input()
+                        if choice == "1":
+                            produit = input(
+                                "entrez que vous voulez chercher \n")
+                            find_product_name(produit)
+                        if choice == "2":
+                            Aide()
+                        if choice == "3":
+                            Panier(name)
+                        if choice == "4":
+                            Account(name)
+                        elif choice == "5":
+                            MailBox(name)
+                        elif choice == "6":
+                            show_avis()
+                        elif choice == "10":
+                            send_mail(name)
+                        elif choice == "7":
+                            facture(name)
+                        elif choice == "8":
+                            modify_password(name)
+                        elif choice == "0":
+                            print(
+                                "****************************************************************************************")
+                            print("Au revoir")
+                            print(
+                                "****************************************************************************************")
 
 
-print(user)
+main()
